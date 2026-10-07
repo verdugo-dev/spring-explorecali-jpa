@@ -1,5 +1,7 @@
 package com.example.explorecali_jpa.business;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.explorecali_jpa.model.Difficulty;
@@ -32,4 +34,13 @@ public class TourService {
     public long total() {
         return tourRepository.count();
     }
+
+    public List<Tour> lookupByDifficulty(Difficulty difficulty) {
+        return tourRepository.findByDifficulty(difficulty);
+    }
+
+    public List<Tour> lookupByPackage(String tourPackageCode) {
+        return tourRepository.findByTourPackageCode(tourPackageCode);
+    }
+
 }
