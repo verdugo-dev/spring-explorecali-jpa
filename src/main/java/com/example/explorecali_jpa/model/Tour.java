@@ -42,8 +42,8 @@ public class Tour {
     @JoinColumn (name = "tour_package_code")
     private TourPackage tourPackage;
 
-    @Column 
-    @Enumerated (EnumType.STRING)
+    @Column
+    @Enumerated(EnumType.STRING)
     private Difficulty difficulty;
 
     @Column 
