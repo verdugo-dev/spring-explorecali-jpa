@@ -63,4 +63,8 @@ public class Tour {
     }
 
     public Tour (){}
+
+    public Integer getId() {
+        return id;
+    }
 }
