@@ -6,9 +6,9 @@ public enum Region {
     Northern_California("Northern California"),
     Varies("Varies");
 
-    private final String label;
-    
-    Region (String label){
+    private String label;
+
+    private Region(String label) {
         this.label = label;
     }
 

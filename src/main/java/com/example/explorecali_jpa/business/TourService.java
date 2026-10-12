@@ -13,34 +13,33 @@ import com.example.explorecali_jpa.repo.TourRepository;
 
 @Service
 public class TourService {
+  private TourPackageRepository tourPackageRepository;
+  private TourRepository tourRepository;
 
-    private TourRepository tourRepository;
-    private TourPackageRepository tourPackageRepository;
+  public TourService(TourPackageRepository tourPackageRepository, TourRepository tourRepository) {
+    this.tourPackageRepository = tourPackageRepository;
+    this.tourRepository = tourRepository;
+  }
 
-    public TourService(TourRepository tourRepository, TourPackageRepository tourPackageRepository) {
-        this.tourRepository = tourRepository;
-        this.tourPackageRepository = tourPackageRepository;
-    }
+  public Tour createTour(String tourPackageName, String title,
+      String description, String blurb, Integer price, String duration,
+      String bullets, String keywords, Difficulty difficulty, Region region) {
 
-    // Create a new tour
-    public Tour createTour(String tourPackageName, String title, String description, String blurb, Integer price,
-            String duration, String bullets, String keywords, Difficulty difficulty, Region region) {
-        
-        TourPackage tourPackage = tourPackageRepository.findByName(tourPackageName).orElseThrow(() -> new RuntimeException("Tour package does not exist: " + tourPackageName));
-        return tourRepository.save(new Tour(title, description, blurb, price, duration, bullets, keywords, tourPackage, difficulty, region));
-    }
+    TourPackage tourPackage = tourPackageRepository.findByName(tourPackageName)
+        .orElseThrow(() -> new RuntimeException("Tour Package not found for id:" + tourPackageName));
+    return tourRepository.save(new Tour(title, description, blurb,
+        price, duration, bullets, keywords, tourPackage, difficulty, region));
+  }
 
-    // Get total number of tours
-    public long total() {
-        return tourRepository.count();
-    }
+  public List<Tour> lookupByDifficulty(Difficulty difficulty) {
+    return tourRepository.findByDifficulty(difficulty);
+  }
 
-    public List<Tour> lookupByDifficulty(Difficulty difficulty) {
-        return tourRepository.findByDifficulty(difficulty);
-    }
+  public List<Tour> lookupByPackage(String tourPackageCode) {
+    return tourRepository.findByTourPackageCode(tourPackageCode);
+  }
 
-    public List<Tour> lookupByPackage(String tourPackageCode) {
-        return tourRepository.findByTourPackageCode(tourPackageCode);
-    }
-
+  public long total() {
+    return tourRepository.count();
+  }
 }

@@ -8,7 +8,6 @@ import com.example.explorecali_jpa.model.Difficulty;
 import com.example.explorecali_jpa.model.Tour;
 
 public interface TourRepository extends JpaRepository<Tour, Integer> {
-
-    List<Tour> findByDifficulty(Difficulty difficulty);
+    List<Tour> findByDifficulty(Difficulty diff);
     List<Tour> findByTourPackageCode(String code);
 }

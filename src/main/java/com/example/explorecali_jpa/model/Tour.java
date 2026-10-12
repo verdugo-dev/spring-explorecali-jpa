@@ -1,5 +1,7 @@
 package com.example.explorecali_jpa.model;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -19,52 +21,140 @@ public class Tour {
 
     @Column 
     private String title;
-    
-    @Column (length=2000)
+
+    @Column (length = 2000)
     private String description;
-    
-    @Column (length=2000)
+
+    @Column (length = 2000)
     private String blurb;
-    
+
     @Column 
     private Integer price;
-    
+
     @Column 
     private String duration;
-    
-    @Column (length=1000)
+
+    @Column (length = 2000)
     private String bullets;
-    
+
     @Column 
     private String keywords;
 
     @ManyToOne 
-    @JoinColumn (name = "tour_package_code")
+    @JoinColumn (name="tour_package_code")
     private TourPackage tourPackage;
 
-    @Column
-    @Enumerated(EnumType.STRING)
+    @Column 
+    @Enumerated (EnumType.STRING)
     private Difficulty difficulty;
 
     @Column 
     private Region region;
 
-    public Tour (String title, String description, String blurb, Integer price, String duration, String bullets, String keywords, TourPackage tourPackage, Difficulty difficulty, Region region){
-        this.title = title;
-        this.description = description;
-        this.blurb = blurb;
-        this.price = price;
-        this.duration = duration;
-        this.bullets = bullets;
-        this.keywords = keywords;
-        this.tourPackage = tourPackage;
-        this.difficulty = difficulty;
-        this.region = region;
-    }
 
-    public Tour (){}
+    public Tour (String title, String description, String blurb, Integer price, String duration, String bullets,
+        String keywords, TourPackage tourPackage, Difficulty difficulty, Region region) {
+            this.title = title;
+            this.description = description;
+            this.blurb = blurb;
+            this.price = price;
+            this.duration = duration;
+            this.bullets = bullets;
+            this.keywords = keywords;
+            this.tourPackage = tourPackage;
+            this.difficulty = difficulty;
+            this.region = region;
+        }
+
+    public Tour() {
+    }
 
     public Integer getId() {
-        return id;
+        return this.id;
     }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getBlurb() {
+        return this.blurb;
+    }
+
+    public Integer getPrice() {
+        return this.price;
+    }
+
+    public String getDuration() {
+        return this.duration;
+    }
+
+    public String getBullets() {
+        return this.bullets;
+    }
+
+    public String getKeywords() {
+        return this.keywords;
+    }
+
+    public TourPackage getTourPackage() {
+        return this.tourPackage;
+    }
+
+    public Difficulty getDifficulty() {
+        return this.difficulty;
+    }
+
+    public Region getRegion() {
+        return this.region;
+    }
+
+
+    @Override 
+    public String toString() {
+        return "Tour{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", blurb='" + blurb + '\'' +
+                ", price=" + price +
+                ", duration='" + duration + '\'' +
+                ", bullets='" + bullets + '\'' +
+                ", keywords='" + keywords + '\'' +
+                ", tourPackage=" + tourPackage +
+                ", difficulty=" + difficulty +
+                ", region=" + region +
+                '}';
+    }
+    
+
+    @Override 
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Tour tour = (Tour) o;
+
+        return Objects.equals(id, tour.id) &&
+                Objects.equals(title, tour.title) &&
+                Objects.equals(description, tour.description) &&
+                Objects.equals(blurb, tour.blurb) &&
+                Objects.equals(price, tour.price) &&
+                Objects.equals(duration, tour.duration) &&
+                Objects.equals(bullets, tour.bullets) &&
+                Objects.equals(keywords, tour.keywords) &&
+                Objects.equals(tourPackage, tour.tourPackage) &&
+                difficulty == tour.difficulty &&
+                region == tour.region;
+    }
+
+    @Override 
+    public int hashCode() {
+        return Objects.hash(id, title, description, blurb, price, duration, bullets, keywords, tourPackage, difficulty, region);
+    }
+    
 }

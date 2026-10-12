@@ -11,5 +11,4 @@ import com.example.explorecali_jpa.model.TourPackage;
 public interface TourPackageRepository extends JpaRepository<TourPackage, String> {
 
     Optional<TourPackage> findByName(String name);
-
 }
